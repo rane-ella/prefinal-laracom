@@ -1,10 +1,11 @@
-version: '3'
 services:
   app:
     build: .
     container_name: app
     restart: unless-stopped
     tty: true
+    depends_on:
+      - db
     environment:
       SERVICE_NAME: app-api
       SERVICE_TAGS: dev
@@ -19,6 +20,8 @@ services:
     container_name: webserver
     restart: unless-stopped
     tty: true
+    depends_on:
+      - app
     ports:
       - "8000:8000"
     volumes:
@@ -36,20 +39,27 @@ services:
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - app-network
   mailhog:
-    build: ./mailhog
+    image: mailhog/mailhog:v1.0.1
     container_name: mailhog
+    restart: unless-stopped
     tty: true
     ports:
+      - "1025:1025"   
       - "8025:8025"
-      - "1025:1025"
     environment:
       MH_STORAGE: maildir
       MH_MAILDIR_PATH: /home/mailhog/mails

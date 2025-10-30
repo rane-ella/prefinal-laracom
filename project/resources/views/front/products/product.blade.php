@@ -4,9 +4,7 @@
     <meta property="og:type" content="product"/>
     <meta property="og:title" content="{{ $product->name }}"/>
     <meta property="og:description" content="{{ strip_tags($product->description) }}"/>
-    @if(!is_null($product->cover))
-        <meta property="og:image" content="{{ asset("storage/$product->cover") }}"/>
-    @endif
+    <meta property="og:image" content="{{ $product->cover_image_url }}" />
 @endsection
 
 @section('content')

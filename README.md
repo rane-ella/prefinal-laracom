@@ -11,22 +11,63 @@
 
 Sign-up with [Digital Ocean and get $10 discount](https://m.do.co/c/bce94237de96)!
 
-# Laravel FREE E-Commerce Software
+# 🛍️ Laravel E-Commerce Platform
 
-Features Provided
+A comprehensive, open-source e-commerce solution built with Laravel, featuring a modern architecture and robust functionality.
 
--   Products
--   Cart
--   Checkout
--   Categories
--   Customers
--   Orders
--   Payment
--   Couriers
--   Employees
+## ✨ Key Features
 
--   To view more details of the features
-    See full [documentation](https://jsdecena.github.io/laracom)
+| Feature | Description |
+|---------|-------------|
+| 🏪 **Products** | Full product management with categories, attributes, and inventory tracking |
+| 🛒 **Shopping Cart** | Persistent cart functionality with guest checkout support |
+| 💳 **Checkout** | Streamlined multi-step checkout process |
+| 📦 **Order Management** | Complete order processing and management |
+| 👥 **Customer System** | Customer accounts, profiles, and order history |
+| 💰 **Payment Integration** | Multiple payment gateway support |
+| 🚚 **Shipping** | Courier integration and shipping management |
+| 👔 **Admin Dashboard** | Comprehensive admin interface for store management |
+
+## 🔄 System Flow
+
+### Customer Journey
+
+```mermaid
+graph TD
+    A[Visitor] -->|Browse| B[Product Catalog]
+    B --> C[Product Details]
+    C --> D[Add to Cart]
+    D --> E{Checkout}
+    E -->|Guest| F[Register/Login]
+    E -->|Logged In| G[Shipping Info]
+    F --> G
+    G --> H[Payment]
+    H --> I[Order Confirmation]
+    I --> J[Order Tracking]
+    
+    style A fill:#9f9,stroke:#333
+    style I fill:#9f9,stroke:#333
+```
+
+### Admin Workflow
+
+```mermaid
+graph TD
+    A[Admin Login] --> B[Dashboard]
+    B --> C[Products]
+    B --> D[Orders]
+    B --> E[Customers]
+    C --> C1[Add/Edit Products]
+    D --> D1[Process Orders]
+    E --> E1[Manage Customers]
+    
+    style A fill:#9cf,stroke:#333
+    style B fill:#c9f,stroke:#333
+```
+
+## 📚 Documentation
+
+For detailed documentation, please visit the [official documentation](https://jsdecena.github.io/laracom).
 
 # Simplified DOCKER setup
 

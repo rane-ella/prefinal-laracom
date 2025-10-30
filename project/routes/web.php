@@ -13,6 +13,29 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+
+// Test route to check image access
+Route::get('/test-image', function() {
+    $files = Storage::files('public/products');
+    $images = [];
+    
+    foreach ($files as $file) {
+        $images[] = [
+            'path' => $file,
+            'url' => Storage::url($file),
+            'exists' => Storage::exists($file),
+            'public_path' => public_path('storage/' . str_replace('public/', '', $file)),
+            'public_exists' => file_exists(public_path('storage/' . str_replace('public/', '', $file)))
+        ];
+    }
+    
+    return response()->json([
+        'storage_path' => storage_path('app'),
+        'public_path' => public_path(),
+        'images' => $images
+    ]);
+});
 
 /**
  * Admin routes

@@ -28,13 +28,41 @@
                                 </div>
                             </div>
                         </div>
-                        @if (isset($product->cover))
-                            <img src="{{ $product->cover }}" alt="{{ $product->name }}"
-                                class="img-bordered img-responsive">
-                        @else
-                            <img src="{{ asset('images/NoData.png') }}" alt="{{ $product->name }}"
-                                class="img-bordered img-responsive">
-                        @endif
+                        <div class="product-image-container" style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; border: 1px solid #eee; border-radius: 4px; padding: 10px;">
+                            @php
+                                $imageUrl = $product->cover_image_url;
+                                $imageExists = false;
+                                
+                                // Check if the image exists in storage
+                                if (!empty($product->cover)) {
+                                    $path = ltrim($product->cover, '/');
+                                    $path = str_replace(['storage/', 'products/'], '', $path);
+                                    $storagePath = storage_path('app/public/products/' . $path);
+                                    $imageExists = file_exists($storagePath);
+                                    
+                                    \Log::info('Product image check:', [
+                                        'product_id' => $product->id,
+                                        'cover' => $product->cover,
+                                        'path' => $storagePath,
+                                        'exists' => $imageExists ? 'yes' : 'no',
+                                        'url' => $imageUrl
+                                    ]);
+                                }
+                            @endphp
+                            
+                            @if($imageExists || filter_var($product->cover, FILTER_VALIDATE_URL))
+                                <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
+                                    class="img-fluid" 
+                                    style="max-height: 100%; max-width: 100%; object-fit: contain;"
+                                    onerror="this.onerror=null; this.src='{{ asset('images/no-image-available.jpg') }}'"
+                                    loading="lazy">
+                            @else
+                                <div style="text-align: center; width: 100%;">
+                                    <i class="fa fa-image fa-4x" style="color: #ddd; margin-bottom: 10px;"></i>
+                                    <p style="color: #999;">No Image Available</p>
+                                </div>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="product-text">

@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\LaraStructure::class
+        Commands\LaraStructure::class,
+        Commands\UpdateProductCovers::class
     ];
 
     /**

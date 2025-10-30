@@ -1,33 +1,39 @@
 <div class="row">
     <div class="col-md-6">
-        @if (!empty($product->cover))
-            <ul id="thumbnails" class="col-md-4 list-unstyled">
-                <li>
-                    <a href="javascript: void(0)">
-                        <img class="img-responsive img-thumbnail" src="{{ $product->cover }}" alt="{{ $product->name }}" />
-                    </a>
-                </li>
-                @if (isset($images) && !$images->isEmpty())
-                    @foreach ($images as $image)
-                        <li>
-                            <a href="javascript: void(0)">
-                                <img class="img-responsive img-thumbnail" src="{{ asset("storage/$image->src") }}"
-                                    alt="{{ $product->name }}" />
-                            </a>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
-            <figure class="text-center product-cover-wrap col-md-8">
-                <img id="main-image" class="product-cover img-responsive" src="{{ $product->cover }}?w=400"
-                    data-zoom="{{ $product->cover }}?w=1200">
-            </figure>
-        @else
-            <figure>
-                <img src="{{ asset('images/NoData.png') }}" alt="{{ $product->name }}"
-                    class="img-bordered img-responsive">
-            </figure>
-        @endif
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product-thumbnails">
+                    <div class="thumbnail-container mb-2" style="height: 80px; overflow: hidden; border: 1px solid #ddd; border-radius: 4px; padding: 5px; cursor: pointer;" 
+                         onclick="document.getElementById('main-image').src = '{{ $product->cover_image_url }}?w=600'; document.getElementById('main-image').dataset.zoom = '{{ $product->cover_image_url }}?w=1200';">
+                        <img src="{{ $product->cover_image_url }}?w=100" alt="{{ $product->name }}" 
+                             class="img-fluid" style="width: 100%; height: 100%; object-fit: contain;"
+                             onerror="this.onerror=null; this.src='{{ asset('images/NoData.png') }}'">
+                    </div>
+                    @if (isset($images) && !$images->isEmpty())
+                        @foreach ($images as $image)
+                            <div class="thumbnail-container mb-2" style="height: 80px; overflow: hidden; border: 1px solid #ddd; border-radius: 4px; padding: 5px; cursor: pointer;"
+                                 onclick="document.getElementById('main-image').src = '{{ asset('storage/' . $image->src) }}?w=600'; document.getElementById('main-image').dataset.zoom = '{{ asset('storage/' . $image->src) }}?w=1200';">
+                                <img src="{{ asset('storage/' . $image->src) }}?w=100" alt="{{ $product->name }}" 
+                                     class="img-fluid" style="width: 100%; height: 100%; object-fit: contain;"
+                                     onerror="this.onerror=null; this.src='{{ asset('images/NoData.png') }}'"
+                                     loading="lazy">
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="product-main-image" style="border: 1px solid #eee; border-radius: 4px; padding: 10px; text-align: center;">
+                    <img id="main-image" class="img-fluid" 
+                         src="{{ $product->cover_image_url }}?w=600" 
+                         data-zoom="{{ $product->cover_image_url }}?w=1200" 
+                         alt="{{ $product->name }}"
+                         style="max-height: 500px; width: auto; max-width: 100%;"
+                         onerror="this.onerror=null; this.src='{{ asset('images/NoData.png') }}'"
+                         loading="eager">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="product-description">

@@ -144,4 +144,108 @@ class Product extends Model implements Buyable
     {
         return $this->belongsTo(Brand::class);
     }
+
+    /**
+     * Get the URL for the product's cover image.
+     *
+     * @return string
+     */
+    public function getCoverImageUrlAttribute()
+    {
+        // If no cover image is set, return the default image
+        if (empty($this->cover)) {
+            return $this->getDefaultImageUrl();
+        }
+
+        // If it's already a full URL, return it
+        if (filter_var($this->cover, FILTER_VALIDATE_URL)) {
+            return $this->cover;
+        }
+
+        // Clean up the path - replace backslashes with forward slashes
+        $path = str_replace('\\', '/', $this->cover);
+        $path = ltrim($path, '/');
+        $path = str_replace(['storage/', 'products/'], '', $path);
+        
+        // Build the URL to the image
+        $imageUrl = asset('storage/products/' . $path);
+        
+        // Log the URL for debugging
+        \Log::info('Generated image URL:', [
+            'product_id' => $this->id,
+            'cover' => $this->cover,
+            'path' => $path,
+            'url' => $imageUrl
+        ]);
+        
+        return $imageUrl;
+    }
+    
+    /**
+     * Get the URL for the default product image.
+     *
+     * @return string
+     */
+    protected function getDefaultImageUrl()
+    {
+        $defaultImage = 'images/no-image-available.jpg';
+        $defaultImagePath = public_path($defaultImage);
+        
+        // Create the default image if it doesn't exist
+        if (!file_exists($defaultImagePath)) {
+            if (!is_dir(public_path('images'))) {
+                mkdir(public_path('images'), 0755, true);
+            }
+            
+            $img = imagecreatetruecolor(400, 300);
+            $bgColor = imagecolorallocate($img, 240, 240, 240);
+            $textColor = imagecolorallocate($img, 150, 150, 150);
+            
+            imagefill($img, 0, 0, $bgColor);
+            imagestring($img, 5, 80, 140, 'No Image Available', $textColor);
+            
+            imagejpeg($img, $defaultImagePath, 80);
+            imagedestroy($img);
+        }
+        
+        return asset($defaultImage);
+    }
+    
+    /**
+     * Get the relative path between two paths
+     *
+     * @param string $from
+     * @param string $to
+     * @return string
+     */
+    protected function getRelativePath($from, $to)
+    {
+        // Remove drive letter if present
+        $from = is_dir($from) ? rtrim($from, '\\/') . '/' : $from;
+        $to = is_dir($to) ? rtrim($to, '\\/') . '/' : $to;
+        
+        $from = str_replace('\\', '/', $from);
+        $to = str_replace('\\', '/', $to);
+        
+        $from = explode('/', $from);
+        $to = explode('/', $to);
+        
+        $relativePath = $to;
+        
+        foreach ($from as $depth => $dir) {
+            if ($dir === $to[$depth]) {
+                array_shift($relativePath);
+            } else {
+                $remaining = count($from) - $depth;
+                if ($remaining > 1) {
+                    $relativePath = array_pad($relativePath, -1 * (count($relativePath) + $remaining - 1), '..');
+                    break;
+                } else {
+                    $relativePath[0] = './' . $relativePath[0];
+                }
+            }
+        }
+        
+        return implode('/', $relativePath);
+    }
 }
