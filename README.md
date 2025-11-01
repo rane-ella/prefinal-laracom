@@ -7,13 +7,13 @@
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/larac0m/Lobby)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom?ref=badge_shield)
 
-# Get discount on Digital Ocean
+![Laracom Dashboard](screenshots/dashboard.png)
 
-Sign-up with [Digital Ocean and get $10 discount](https://m.do.co/c/bce94237de96)!
 
-# 🛍️ Laravel E-Commerce Platform
+# 🛍️ Laracom
 
-A comprehensive, open-source e-commerce solution built with Laravel, featuring a modern architecture and robust functionality.
+Laravel FREE E-Commerce Software. A full-featured, modular e-commerce platform built on Laravel, designed for rapid deployment and scalable management of products, inventory, and orders.
+
 
 ## ✨ Key Features
 
@@ -30,7 +30,7 @@ A comprehensive, open-source e-commerce solution built with Laravel, featuring a
 
 ## 🔄 System Flow
 
-### Customer Journey
+### Customer Workflow
 
 ```mermaid
 graph TD
@@ -65,40 +65,79 @@ graph TD
     style B fill:#c9f,stroke:#333
 ```
 
-## 📚 Documentation
 
-For detailed documentation, please visit the [official documentation](https://jsdecena.github.io/laracom).
+# Installation Process
 
-# Simplified DOCKER setup
+## Step 1: Clone the repository
 
-## In your teminal, issue these commands
-
--   RUN `docker-compose up -d --build`
--   If your runtime is apple silicon, use `docker-compose -f docker-compose-m1.yml up -d --build` command
--   RUN `docker exec -it app bash`
--   Inside the container, run `composer install && chmod -R 777 storage/ bootstrap/cache/`
--   Inside the container, run `php artisan migrate --seed`
--   While inside the container, compile the assets with `npm i && npm run dev`
--   While inside the container, link the images `php artisan storage:link`
--   OPEN [http://localhost:8000](http://localhost:8000)
-
-## If you want to use mailhog as SMTP
-
-1.Create a ./mails directory
-2.change .env like this
-
-```
-MAIL_DRIVER=smtp
-MAIL_HOST=mailhog
-MAIL_PORT=1025
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="test@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
+```bash
+git clone https://github.com/jsdecena/laracom.git
+cd laracom
 ```
 
-3.Go to http://localhost:8025 and verify that the mailhog screen appears
+## Step 2: Docker Setup
+
+### For standard systems:
+```bash
+docker-compose up -d --build
+```
+
+### For Apple Silicon (M1/M2) systems:
+```bash
+docker-compose -f docker-compose-m1.yml up -d --build
+```
+
+### Access the container:
+```bash
+docker exec -it app bash
+```
+
+### Inside the container, run these commands:
+```bash
+# Install dependencies and set permissions
+composer install && chmod -R 777 storage/ bootstrap/cache/
+
+# Run database migrations and seed initial data
+php artisan migrate --seed
+
+# Install and compile frontend assets
+npm i && npm run dev
+
+# Create storage link for images
+php artisan storage:link
+```
+
+## Step 3: Access the Application
+
+Open your browser and navigate to:
+```
+http://localhost:8000
+```
+
+## Optional: MailHog Setup
+
+1. Create a `mails` directory in your project root:
+   ```bash
+   mkdir -p mails
+   ```
+
+2. Update your `.env` file with these mail settings:
+   ```
+   MAIL_DRIVER=smtp
+   MAIL_HOST=mailhog
+   MAIL_PORT=1025
+   MAIL_USERNAME=null
+   MAIL_PASSWORD=null
+   MAIL_ENCRYPTION=null
+   MAIL_FROM_ADDRESS="test@example.com"
+   MAIL_FROM_NAME="${APP_NAME}"
+   ```
+
+3. Verify MailHog is running by accessing the web interface at:
+   ```
+   http://localhost:8025
+   ```
+   You should see the MailHog web interface where you can view all outgoing emails.
 
 # Author
 
