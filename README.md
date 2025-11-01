@@ -3,6 +3,120 @@
 
 # 🛍️ Laracom
 
+Laravel FREE E-Commerce Software. A full-featured, modular e-commerce platform built on Laravel, designed for rapid deployment and scalable management of products, inventory, and orders.
+
+
+## ✨ Key Features
+
+| Feature | Description |
+|---------|-------------|
+| 🏪 **Products** | Full product management with categories, attributes, and inventory tracking |
+| 🛒 **Shopping Cart** | Persistent cart functionality with guest checkout support |
+| 💳 **Checkout** | Streamlined multi-step checkout process |
+| 📦 **Order Management** | Complete order processing and management |
+| 👥 **Customer System** | Customer accounts, profiles, and order history |
+| 💰 **Payment Integration** | Multiple payment gateway support |
+| 🚚 **Shipping** | Courier integration and shipping management |
+| 👔 **Admin Dashboard** | Comprehensive admin interface for store management |
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph "Client Layer"
+        A[Web Browser]
+        B[Mobile App]
+    end
+    
+    subgraph "Load Balancer"
+        C[NGINX]
+    end
+    
+    subgraph "Application Layer"
+        D[Laravel Application]
+        E[API Endpoints]
+        F[Authentication]
+    end
+    
+    subgraph "Services"
+        G[Payment Processing]
+        H[Order Processing]
+        I[Inventory Management]
+        J[Email Service]
+    end
+    
+    subgraph "Data Layer"
+        K[(MySQL Database)]
+        L[(Redis Cache)]
+        M[(File Storage)]
+    end
+    
+    A --> C
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    D --> G
+    D --> H
+    D --> I
+    D --> J
+    
+    D --> K
+    D --> L
+    D --> M
+    
+    style A fill:#e1f5fe,stroke:#039be5
+    style B fill:#e1f5fe,stroke:#039be5
+    style C fill:#e8f5e9,stroke:#43a047
+    style D fill:#e8eaf6,stroke:#3949ab
+    style E fill:#e8eaf6,stroke:#3949ab
+    style F fill:#e8eaf6,stroke:#3949ab
+    style G fill:#f3e5f5,stroke:#9c27b0
+    style H fill:#f3e5f5,stroke:#9c27b0
+    style I fill:#f3e5f5,stroke:#9c27b0
+    style J fill:#f3e5f5,stroke:#9c27b0
+    style K fill:#fce4ec,stroke:#e91e63
+    style L fill:#fce4ec,stroke:#e91e63
+    style M fill:#fce4ec,stroke:#e91e63
+```
+
+## 🔄 System Flow
+
+### Customer Workflow
+
+```mermaid
+graph TD
+    A[Visitor] -->|Browse| B[Product Catalog]
+    B --> C[Product Details]
+    C --> D[Add to Cart]
+    D --> E{Checkout}
+    E -->|Guest| F[Register/Login]
+    E -->|Logged In| G[Shipping Info]
+    F --> G
+    G --> H[Payment]
+    H --> I[Order Confirmation]
+    I --> J[Order Tracking]
+    
+    style A fill:#9f9,stroke:#333
+    style I fill:#9f9,stroke:#333
+```
+
+### Admin Workflow
+
+```mermaid
+graph TD
+    A[Admin Login] --> B[Dashboard]
+    B --> C[Products]
+    B --> D[Orders]
+    B --> E[Customers]
+    C --> C1[Add/Edit Products]
+    D --> D1[Process Orders]
+    E --> E1[Manage Customers]
+    
+    style A fill:#9cf,stroke:#333
+    style B fill:#c9f,stroke:#333
+```
+
 ## 🏗️ System Architecture
 
 ```mermaid
@@ -49,7 +163,7 @@ graph TD
     style C fill:#e8eaf6,stroke:#3949ab,stroke-width:2px
     style M fill:#fce4ec,stroke:#e91e63,stroke-width:2px
     style N fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
-    style O fill:#e8f5e9,stroke#4caf50,stroke-width:2px
+    style O fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
 ```
 
 ### Key Components:
@@ -62,58 +176,6 @@ graph TD
 - **Cache**: Redis for improved performance
 - **Storage**: Local file storage for uploads and media
 
-Laravel FREE E-Commerce Software. A full-featured, modular e-commerce platform built on Laravel, designed for rapid deployment and scalable management of products, inventory, and orders.
-
-
-## ✨ Key Features
-
-| Feature | Description |
-|---------|-------------|
-| 🏪 **Products** | Full product management with categories, attributes, and inventory tracking |
-| 🛒 **Shopping Cart** | Persistent cart functionality with guest checkout support |
-| 💳 **Checkout** | Streamlined multi-step checkout process |
-| 📦 **Order Management** | Complete order processing and management |
-| 👥 **Customer System** | Customer accounts, profiles, and order history |
-| 💰 **Payment Integration** | Multiple payment gateway support |
-| 🚚 **Shipping** | Courier integration and shipping management |
-| 👔 **Admin Dashboard** | Comprehensive admin interface for store management |
-
-## 🔄 System Flow
-
-### Customer Workflow
-
-```mermaid
-graph TD
-    A[Visitor] -->|Browse| B[Product Catalog]
-    B --> C[Product Details]
-    C --> D[Add to Cart]
-    D --> E{Checkout}
-    E -->|Guest| F[Register/Login]
-    E -->|Logged In| G[Shipping Info]
-    F --> G
-    G --> H[Payment]
-    H --> I[Order Confirmation]
-    I --> J[Order Tracking]
-    
-    style A fill:#9f9,stroke:#333
-    style I fill:#9f9,stroke:#333
-```
-
-### Admin Workflow
-
-```mermaid
-graph TD
-    A[Admin Login] --> B[Dashboard]
-    B --> C[Products]
-    B --> D[Orders]
-    B --> E[Customers]
-    C --> C1[Add/Edit Products]
-    D --> D1[Process Orders]
-    E --> E1[Manage Customers]
-    
-    style A fill:#9cf,stroke:#333
-    style B fill:#c9f,stroke:#333
-```
 
 
 # Installation Process
@@ -189,3 +251,36 @@ http://localhost:8000
    ```
    You should see the MailHog web interface where you can view all outgoing emails.
 
+## 🖥️ UI Showcase
+
+### 1. User Authentication
+Secure and intuitive authentication system for both customers and administrators.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/login.png" alt="Login Page" width="45%" style="margin: 5px;">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/register.png" alt="Registration Page" width="45%" style="margin: 5px;">
+</div>
+
+### 2. Shopping Experience
+Seamless shopping experience from product selection to checkout.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/shoppingcart.png" alt="Shopping Cart" width="30%" style="margin: 5px;">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/shoppingcart1.png" alt="Cart Items" width="30%" style="margin: 5px;">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/shoppingcart2.png" alt="Checkout Process" width="30%" style="margin: 5px;">
+</div>
+
+### 3. Order Management
+Efficient order processing and management system.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/shippingaddress.png" alt="Shipping Address" width="45%" style="margin: 5px;">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/shippingaddress1.png" alt="Order Confirmation" width="45%" style="margin: 5px;">
+</div>
+
+### 4. Admin Dashboard
+Comprehensive dashboard for managing your e-commerce store.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/rane-ella/prefinal-laracom/master/screenshots/dashboard.png" alt="Admin Dashboard" width="90%" style="margin: 10px 0; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>

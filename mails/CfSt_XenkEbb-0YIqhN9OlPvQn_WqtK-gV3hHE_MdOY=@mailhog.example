@@ -1,0 +1,102 @@
+HELO:<localhost>
+FROM:<noreply@example.com>
+TO:<john@doe.com>
+
+Message-ID: <2cdd73eadefc540864aaf0c97b7d005c@localhost>
+Date: Thu, 30 Oct 2025 09:51:36 +0000
+Subject: Send Email Notification To Admin Mailable
+From: Laravel <noreply@example.com>
+To: Berenice <john@doe.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html lang=3D"en">
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+"/>
+    <meta charset=3D"UTF-8">
+    <meta name=3D"viewport"
+          content=3D"width=3Ddevice-width, user-scalable=3Dno, initial-scal=
+e=3D1.0, maximum-scale=3D1.0, minimum-scale=3D1.0">
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"ie=3Dedge">
+    <title>Order Invoice</title>
+    <link rel=3D"stylesheet" href=3D"https://cdnjs.cloudflare.com/ajax/libs=
+/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type=3D"text/css">
+        table { border-collapse: collapse;}
+    </style>
+</head>
+<body>
+<section class=3D"container">
+    <div class=3D"col-md-12">
+        <h2>Hi Laravel! <br />An order has been created! </h2>
+        <p>Here are the details of the order below: </p>
+        <table class=3D"table table-striped" width=3D"100%" border=3D"0" ce=
+llspacing=3D"0" cellpadding=3D"0">
+            <thead>
+            <tr>
+                <th class=3D"col-md-2">SKU</th>
+                <th class=3D"col-md-2">Name</th>
+                <th class=3D"col-md-3">Description</th>
+                <th class=3D"col-md-1">Quantity</th>
+                <th class=3D"col-md-4 text-right">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+                            <tr>
+                    <td>1070346</td>
+                    <td>Voluptas qui officiis a non ipsum aut similique.</t=
+d>
+                    <td>
+                        Dolorem minima minima hic tempore occaecati. Repudi=
+andae ut maiores dolor. Voluptatem ducimus qui omnis harum culpa. Sed quia =
+error neque molestiae.
+                                                                    </td>
+                    <td>1</td>
+                    <td class=3D"text-right">USD 5.00</td>
+                </tr>
+                        </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Subtotal:</td>
+                <td class=3D"text-right">USD 5.00</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Shipping:</td>
+                <td class=3D"text-right">USD 0.00</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Discounts:</td>
+                <td class=3D"text-right">(USD 0.00)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tax:</td>
+                <td class=3D"text-right">USD 0.00</td>
+            </tr>
+            <tr class=3D"bg-warning">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>Total:</strong></td>
+                <td class=3D"text-right"><strong>USD 5.00</strong></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</section>
+</body>
+</html>
