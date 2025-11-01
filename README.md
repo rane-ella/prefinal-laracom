@@ -19,66 +19,6 @@ Laravel FREE E-Commerce Software. A full-featured, modular e-commerce platform b
 | 🚚 **Shipping** | Courier integration and shipping management |
 | 👔 **Admin Dashboard** | Comprehensive admin interface for store management |
 
-## 🏗️ System Architecture
-
-```mermaid
-graph TD
-    subgraph "Client Layer"
-        A[Web Browser]
-        B[Mobile App]
-    end
-    
-    subgraph "Load Balancer"
-        C[NGINX]
-    end
-    
-    subgraph "Application Layer"
-        D[Laravel Application]
-        E[API Endpoints]
-        F[Authentication]
-    end
-    
-    subgraph "Services"
-        G[Payment Processing]
-        H[Order Processing]
-        I[Inventory Management]
-        J[Email Service]
-    end
-    
-    subgraph "Data Layer"
-        K[(MySQL Database)]
-        L[(Redis Cache)]
-        M[(File Storage)]
-    end
-    
-    A --> C
-    B --> C
-    C --> D
-    D --> E
-    D --> F
-    D --> G
-    D --> H
-    D --> I
-    D --> J
-    
-    D --> K
-    D --> L
-    D --> M
-    
-    style A fill:#e1f5fe,stroke:#039be5
-    style B fill:#e1f5fe,stroke:#039be5
-    style C fill:#e8f5e9,stroke:#43a047
-    style D fill:#e8eaf6,stroke:#3949ab
-    style E fill:#e8eaf6,stroke:#3949ab
-    style F fill:#e8eaf6,stroke:#3949ab
-    style G fill:#f3e5f5,stroke:#9c27b0
-    style H fill:#f3e5f5,stroke:#9c27b0
-    style I fill:#f3e5f5,stroke:#9c27b0
-    style J fill:#f3e5f5,stroke:#9c27b0
-    style K fill:#fce4ec,stroke:#e91e63
-    style L fill:#fce4ec,stroke:#e91e63
-    style M fill:#fce4ec,stroke:#e91e63
-```
 
 ## 🔄 System Flow
 
