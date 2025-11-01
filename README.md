@@ -1,15 +1,66 @@
-[![Build Status](https://travis-ci.org/jsdecena/laracom.svg?branch=master)](https://travis-ci.org/jsdecena/laracom)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Laracommerce/laracom/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Laracommerce/laracom/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/Laracommerce/laracom/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![codecov](https://codecov.io/gh/jsdecena/laracom/branch/master/graph/badge.svg)](https://codecov.io/gh/jsdecena/laracom)
-[![Fork Status](https://img.shields.io/github/forks/jsdecena/laracom.svg)](https://github.com/jsdecena/laracom)
-[![Star Status](https://img.shields.io/github/stars/jsdecena/laracom.svg)](https://github.com/jsdecena/laracom)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/larac0m/Lobby)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom?ref=badge_shield)
 
 ![Laracom Dashboard](screenshots/dashboard.png)
 
 # 🛍️ Laracom
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph "Laravel E-commerce System"
+        A[Web Browser] -->|HTTP/HTTPS| B[Nginx Web Server]
+        B -->|PHP-FPM| C[Laravel Application]
+        
+        subgraph "Application Layer"
+            C --> D[Controllers]
+            C --> E[Models]
+            C --> F[Views]
+            C --> G[Middleware]
+        end
+        
+        subgraph "Services"
+            C --> H[Authentication]
+            C --> I[Authorization]
+            C --> J[Payment Processing]
+            C --> K[Order Processing]
+            C --> L[Inventory Management]
+        end
+        
+        subgraph "Data Layer"
+            M[(MySQL Database)]
+            N[(Redis Cache)]
+            O[(File Storage)]
+        end
+        
+        D --> M
+        E --> M
+        H --> M
+        I --> M
+        J --> M
+        K --> M
+        L --> M
+        
+        C --> N
+        C --> O
+    end
+    
+    style A fill:#e1f5fe,stroke:#039be5,stroke-width:2px
+    style B fill:#e8f5e9,stroke:#43a047,stroke-width:2px
+    style C fill:#e8eaf6,stroke:#3949ab,stroke-width:2px
+    style M fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    style N fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style O fill:#e8f5e9,stroke#4caf50,stroke-width:2px
+```
+
+### Key Components:
+- **Frontend**: Responsive web interface built with Blade templates and JavaScript
+- **Web Server**: Nginx handling HTTP requests and serving static assets
+- **Application**: Laravel framework with MVC architecture
+- **Authentication**: Secure user authentication and authorization
+- **Services**: Modular services for business logic
+- **Database**: MySQL for data persistence
+- **Cache**: Redis for improved performance
+- **Storage**: Local file storage for uploads and media
 
 Laravel FREE E-Commerce Software. A full-featured, modular e-commerce platform built on Laravel, designed for rapid deployment and scalable management of products, inventory, and orders.
 
@@ -138,23 +189,3 @@ http://localhost:8000
    ```
    You should see the MailHog web interface where you can view all outgoing emails.
 
-# Author
-
-[Jeff Simons Decena](https://jsdecena.me)
-
-# Contributors
-
-<a href="https://github.com/jsdecena/laracom/graphs/contributors"><img src="https://opencollective.com/laracom/contributors.svg?width=890" title="contributors" alt="contributors" /></a>
-
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom?ref=badge_large)
-
-[![Build Status](https://travis-ci.org/jsdecena/laracom.svg?branch=master)](https://travis-ci.org/jsdecena/laracom)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Laracommerce/laracom/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Laracommerce/laracom/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/Laracommerce/laracom/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![codecov](https://codecov.io/gh/jsdecena/laracom/branch/master/graph/badge.svg)](https://codecov.io/gh/jsdecena/laracom)
-[![Fork Status](https://img.shields.io/github/forks/jsdecena/laracom.svg)](https://github.com/jsdecena/laracom)
-[![Star Status](https://img.shields.io/github/stars/jsdecena/laracom.svg)](https://github.com/jsdecena/laracom)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/larac0m/Lobby)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLaracommerce%2Flaracom?ref=badge_shield)
